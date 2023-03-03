@@ -3,7 +3,7 @@ import React from "react";
 function MobileMenuOption({ Icon, Title, Link }) {
   return (
     <a
-      className="bg-zinc-100 p-2 flex h-14 rounded-lg justify-center items-center gap-2 cursor-pointer group hover:text-primary hover:bg-red-100"
+      className="bg-zinc-100 p-2 flex h-14 rounded-lg justify-center items-center gap-2 cursor-pointer group hover:text-new_secondary hover:bg-primary"
       href={Link}
     >
       <Icon className="h-6" />

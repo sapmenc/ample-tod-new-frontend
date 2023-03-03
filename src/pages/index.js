@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Hero from "@/components/Hero/Hero";
+import Jobs from "@/components/Jobs";
 import Navbar from "@/components/Navbar/Navbar";
 import Overview from "@/components/Overview";
 
@@ -16,6 +17,8 @@ export default function Home() {
         <Navbar />
         <Hero />
         <Overview />
+        <Jobs />
+        lfnldsnl;n
       </main>
     </>
   );

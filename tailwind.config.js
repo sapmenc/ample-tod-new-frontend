@@ -22,7 +22,7 @@ module.exports = {
         ],
       },
       colors: {
-        primary: "#780203",
+        primary: "#eb4a6a",
         dark_primary: "#620203",
         highlight_primary: "#b84042",
         connect_btn: {
