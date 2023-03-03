@@ -31,6 +31,8 @@ module.exports = {
         },
         connect_link: "#e1b76d",
         lower_footer_end_line: "#81913f",
+        new_primary: "#eb4a6a",
+        new_secondary: "#41436a",
       },
     },
   },
