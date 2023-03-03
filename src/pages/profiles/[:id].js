@@ -252,7 +252,7 @@ function profile() {
                   {/* @ts-ignore */}
                   {profile?.experiences?.map((experience, index) => (
                     <div
-                      className="p-5 md:p-8 flex flex-col gap-2 rounded-xl bg-[#F1F4FD]"
+                      className="p-5 md:p-8 flex flex-col gap-2 rounded-2xl bg-[#F1F4FD]"
                       key={index}
                     >
                       <div className="flex justify-between">
@@ -294,7 +294,7 @@ function profile() {
                   {/* @ts-ignore */}
                   {profile?.educations?.map((education, index) => (
                     <div
-                      className="p-5 md:p-8 bg-[#F1F4FD] flex flex-col gap-2 rounded-xl"
+                      className="p-5 md:p-8 bg-[#F1F4FD] flex flex-col gap-2 rounded-2xl"
                       key={index}
                     >
                       <div className="flex justify-between">
@@ -335,7 +335,7 @@ function profile() {
               </p>
               <input
                 type="text"
-                className="w-full rounded-lg p-3 outline-none"
+                className="w-full rounded-lg p-3 outline-none placeholder:tracking-wider"
                 placeholder="Name"
                 value={enquiryName}
                 onChange={(e) => {
@@ -344,7 +344,7 @@ function profile() {
               />
               <input
                 type="text"
-                className="w-full rounded-lg p-3 outline-none"
+                className="w-full rounded-lg p-3 outline-none placeholder:tracking-wider"
                 placeholder="Company Name"
                 value={enquiryCompanyName}
                 onChange={(e) => {
@@ -353,7 +353,7 @@ function profile() {
               />
               <input
                 type="email"
-                className="w-full rounded-lg p-3 outline-none"
+                className="w-full rounded-lg p-3 outline-none placeholder:tracking-wider"
                 placeholder="Email"
                 value={enquiryEmail}
                 onChange={(e) => {
@@ -362,7 +362,7 @@ function profile() {
               />
               <input
                 type="text"
-                className="w-full rounded-lg p-3 outline-none"
+                className="w-full rounded-lg p-3 outline-none placeholder:tracking-wider"
                 placeholder="Mobile"
                 value={enquiryMobile}
                 onChange={(e) => {
@@ -378,7 +378,7 @@ function profile() {
                 // @ts-ignore
                 rows="4"
                 placeholder="Tell us about your requirement"
-                className="w-full rounded-md p-2 outline-none"
+                className="w-full rounded-md p-2 outline-none placeholder:tracking-wide"
                 value={enquiryDetails}
                 onChange={(e) => {
                   setEnquiryDetails(e.target.value);
