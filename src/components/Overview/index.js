@@ -15,14 +15,14 @@ function Overview() {
             alt="workforce svg"
           />
         </div>
-        <h1 className="text-new_primary font-extrabold text-[40px] tracking-wide mt-[22px] md:mt-[35px]">
+        <h1 className="text-new_primary font-extrabold text-[35px] md:text-[45px] tracking-wide mt-[22px] md:mt-[35px]">
           IT WORKFORCE
         </h1>
         <h2 className="mt-[18px] md:mt-[35px] text-sm text-new_secondary font-bold">
           WITH THE CURRENT IT MARKET ENVIRONMENT BEING HIGHLY VOLATILE AND
           COMPETITIVE
         </h2>
-        <p className="mt-[16px] md:mt-[25px] font-thin text-sm text-gray-700">
+        <p className="mt-[16px] md:mt-[25px] text-sm  text-gray-500">
           IT has become extremely vital for companies to possess the ability to
           change the size and make-up of their IT workforce according to their
           present needs. At AMPLE, our IT strategic staffing solutions provide

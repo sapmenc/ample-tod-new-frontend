@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import About from "@/components/About";
 import Head from "next/head";
 import Hero from "@/components/Hero/Hero";
 import Jobs from "@/components/Jobs";
@@ -28,6 +29,7 @@ export default function Home() {
           <Hero />
           <Overview />
           <Jobs />
+          <About />
           lfnldsnl;n
         </div>
       </main>

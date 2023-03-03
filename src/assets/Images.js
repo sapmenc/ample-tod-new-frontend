@@ -4,3 +4,4 @@ export const HeroImageDesktop = "/assets/Banner_DS.svg";
 export const HeroImageMobile = "/assets/Banner_MS.svg";
 export const favLogo = "";
 export const ItWorkIcon = "/assets/IT_wrk_icon.svg";
+export const strategicIcon = "/assets/stratrgic_icon.svg";

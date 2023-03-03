@@ -130,7 +130,7 @@ function Jobs() {
                     <h1 className="text-new_primary font-bold tracking-wide text-lg">
                       Java Developer
                     </h1>
-                    <h2 className="text-gray-800 tracking-wide">
+                    <h2 className="text-new_secondary tracking-wide">
                       Springboot | Microservices
                     </h2>
                   </div>
