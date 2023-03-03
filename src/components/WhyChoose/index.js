@@ -3,7 +3,7 @@ import Image from "next/image";
 import { chooseIcon } from "@/assets/Images";
 function WhyChoose() {
   return (
-    <div className="bg-new_primary px-12 sm:px-16 flex flex-col items-center pb-32 relative">
+    <div className="bg-new_primary px-12 sm:px-16 flex flex-col items-center pb-32 relative mb-48">
       {/* choose icon */}
       <div className="mt-[30px] md:mt-[50px] lg:mt-[60px] w-[75px] md:w-[150px] lg:w-[200px]">
         <Image

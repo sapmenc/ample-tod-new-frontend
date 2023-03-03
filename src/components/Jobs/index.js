@@ -5,6 +5,16 @@ import {
 } from "./../../../node_modules/@heroicons/react/24/outline/index.js";
 import React, { useEffect, useState } from "react";
 
+import HashLoader from "react-spinners/HashLoader";
+import Image from "next/image.js";
+import Link from "next/link.js";
+import { profilesNotFound } from "@/assets/Images.js";
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 const profiles = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const categories = [
   "Java developer",
@@ -24,9 +34,21 @@ const categories = [
   "Product manager",
 ];
 
-function Jobs() {
-  const [selectedCategory, setSelectedCategory] = useState("Java developer");
-  return (
+function Jobs({ titles, filteredProfiles, isLoading, setIsLoading }) {
+  const [selectedTitle, setSelectedTitle] = useState("Java developer");
+  const [selectedRange, setSelectedRange] = useState(0);
+  return isLoading ? (
+    <div className="p-8 h-[750px] flex justify-center items-center">
+      <HashLoader
+        color="#eb4a6a"
+        loading={isLoading}
+        cssOverride={override}
+        size={100}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
+  ) : (
     <div className="mt-32 bg-[#F1F4FD] relative h-[1200px] lg:h-[800px]  flex flex-col items-center px-8 md:px-16 pb-8 md:pb-16">
       {/* search bar */}
       <div
@@ -79,23 +101,23 @@ function Jobs() {
             <option className="text-center" value="">
               --- All Profiles ---
             </option>
-            {categories.map((category) => {
-              return <option value={category}>{category}</option>;
+            {(titles || []).map((title) => {
+              return <option value={title.name}>{title.name}</option>;
             })}
           </select>
 
           {/*job categories desktop view */}
           <div className="hidden h-[570px] shadow-inner shadow-indigo-200/100 px-2 lg:flex flex-col gap-2 mt-5 py-2 overflow-scroll">
-            {categories.map((category) => {
+            {(titles || []).map((title) => {
               return (
                 <div
                   className={`${
-                    selectedCategory === category
+                    selectedTitle === title.name
                       ? "bg-new_primary text-white"
                       : "bg-white text-gray-700 hover:bg-new_primary/80 hover:text-white"
                   } ease-in-out durarion-200 px-4 py-2 rounded-lg flex justify-between items-center cursor-pointer `}
                 >
-                  <p>{category}</p>
+                  <p>{title.name}</p>
                   <div className="h-4 w-4">
                     <ChevronDoubleRightIcon />
                   </div>
@@ -117,39 +139,66 @@ function Jobs() {
                 name=""
                 id=""
                 className="bg-transparent text-new_primary font-bold outline-none"
+                onChange={(e) => {
+                  setSelectedRange(parseInt(e.target.value));
+                }}
               >
-                <option value="">1 - 5 years experience</option>
+                <option value="0">0 - 2 years experience</option>
+                <option value="1">3 - 5 years experience</option>
+                <option value="2">6 - 7 years experience</option>
+                <option value="3">8 - 10 years experience</option>
+                <option value="4">10+ years experience</option>
               </select>
             </div>
           </div>
           <div className="self-start w-full h-[720px] md:h-[780px] lg:h-[570px] mt-5  overflow-scroll flex flex-col p-5 gap-5 shadow-inner px-8 shadow-indigo-200/100">
-            {profiles.map(() => {
-              return (
-                <div className="bg-white py-5 px-10 shadow-lg shadow-indigo-100/100 md:p-5 rounded-xl flex flex-col md:flex-row md:justify-between md:cursor-pointer md:hover:scale-105 duration-200">
-                  <div className="w-full">
-                    <h1 className="text-new_primary font-bold tracking-wide text-lg">
-                      Java Developer
-                    </h1>
-                    <h2 className="text-new_secondary tracking-wide">
-                      Springboot | Microservices
-                    </h2>
-                  </div>
-                  <div className="flex items-center justify-between md:gap-5 md:justify-end w-full">
-                    <div className="flex md:flex-col gap-2 md:gap-0">
-                      <p className="text-gray-700 tracking-wide">view job</p>
-                      <p className="text-slate-400 tracking-wide">
-                        {2} days ago
-                      </p>
-                    </div>
-                    <div>
-                      <div className="w-5 h-5 flex justify-center items-center text-new_primary">
-                        <ChevronDoubleRightIcon className="w-full h-full" />
+            {filteredProfiles[selectedRange]?.length === 0 ? (
+              <div className="w-full h-full flex flex-col justify-center items-center font-bold text-new_secondary text-center uppercase text-[24px] px-8 md:16">
+                <div className="w-[250px] h-[250px]">
+                  <Image
+                    className="w-full h-full"
+                    width={170}
+                    height={50}
+                    object-fit="contain"
+                    src={profilesNotFound}
+                    alt="logo"
+                  />
+                </div>
+                <h1>No profiles in this experience range</h1>
+              </div>
+            ) : (
+              (filteredProfiles[selectedRange] || []).map((profile) => {
+                return (
+                  <Link href={`profiles/${profile._id}`}>
+                    <div className="bg-white py-5 px-10 shadow-lg shadow-indigo-100/100 md:p-5 rounded-xl flex flex-col md:flex-row md:justify-between md:cursor-pointer md:hover:scale-105 duration-200">
+                      <div className="w-full">
+                        <h1 className="text-new_primary font-bold tracking-wide text-lg">
+                          {profile.profileTitle}
+                        </h1>
+                        <h2 className="text-new_secondary tracking-wide">
+                          {profile.skills.join(" | ")}
+                        </h2>
+                      </div>
+                      <div className="flex items-center justify-between md:gap-5 md:justify-end w-full">
+                        <div className="flex md:flex-col gap-5 md:gap-0">
+                          <p className="text-gray-700 tracking-wide">
+                            view job
+                          </p>
+                          <p className="text-slate-400 tracking-wide">
+                            {2} days ago
+                          </p>
+                        </div>
+                        <div>
+                          <div className="w-5 h-5 flex justify-center items-center text-new_primary">
+                            <ChevronDoubleRightIcon className="w-full h-full" />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
+                  </Link>
+                );
+              })
+            )}
           </div>
         </div>
       </div>

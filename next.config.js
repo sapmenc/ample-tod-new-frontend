@@ -5,7 +5,7 @@ const nextConfig = {
   },
   reactStrictMode: true,
   images: {
-    domains: ["ik.imagekit.io"],
+    domains: ["ik.imagekit.io", "cdni.iconscout.com"],
   },
 };
 

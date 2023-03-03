@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import About from "@/components/About";
+import Footer from "@/components/Footer";
 import Head from "next/head";
 import Hero from "@/components/Hero/Hero";
 import Jobs from "@/components/Jobs";
@@ -8,7 +9,12 @@ import Navbar from "@/components/Navbar/Navbar";
 import Overview from "@/components/Overview";
 import WhyChoose from "@/components/WhyChoose";
 
-export default function Home() {
+export default function Home({
+  titles,
+  filteredProfiles,
+  isLoading,
+  setIsLoading,
+}) {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     const app = document.getElementById("app");
@@ -29,10 +35,15 @@ export default function Home() {
         <div id="app">
           <Hero />
           <Overview />
-          <Jobs />
+          <Jobs
+            titles={titles}
+            filteredProfiles={filteredProfiles}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
           <About />
           <WhyChoose />
-          lfnldsnl;n
+          <Footer />
         </div>
       </main>
     </>
