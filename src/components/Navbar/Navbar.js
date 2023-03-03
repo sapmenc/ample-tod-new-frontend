@@ -1,27 +1,26 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import { logo } from "@/assets/Images";
 import {
+  AcademicCapIcon,
   Bars3Icon,
-  XMarkIcon,
+  BuildingOffice2Icon,
   HomeIcon,
   PhoneIcon,
-  BuildingOffice2Icon,
-  AcademicCapIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
-  HomeLink,
-  IndustriesLink,
   CareersLink,
   ContactLink,
+  HomeLink,
+  IndustriesLink,
 } from "@/assets/RouteLinks";
-import MobileMenu from "./MobileMenu";
-import DesktopMenuOptions from "./DesktopMenuOptions";
 
-function Navbar() {
-  const [open, setOpen] = useState(false);
+import DesktopMenuOptions from "./DesktopMenuOptions";
+import Image from "next/image";
+import MobileMenu from "./MobileMenu";
+import { logo } from "@/assets/Images";
+
+function Navbar({ open, setOpen }) {
   return (
-    <nav className="fixed h-20 top-0 left-0 right-0 bg-white z-10 drop-shadow-md lg:px-4">
+    <nav className="no-hightlight fixed h-20 top-0 left-0 right-0 bg-white z-10 drop-shadow-md lg:px-4">
       <div className="w-full p-2.5 flex justify-between items-center  ">
         {/* nav left */}
         <div className="w-50 grow ">

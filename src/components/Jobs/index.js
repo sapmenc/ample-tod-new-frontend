@@ -10,16 +10,16 @@ const categories = [
   "Java developer",
   "Sales",
   "Product manager",
-  "Java developer",
+  "C++ developer",
   "Sales",
   "Product manager",
-  "Java developer",
+  "Python developer",
   "Sales",
   "Product manager",
-  "Java developer",
+  "Javascript developer",
   "Sales",
   "Product manager",
-  "Java developer",
+  "ReactJS developer",
   "Sales",
   "Product manager",
 ];
@@ -85,7 +85,7 @@ function Jobs() {
           </select>
 
           {/*job categories desktop view */}
-          <div className="hidden h-[570px] lg:flex flex-col gap-2 mt-5 py-2 overflow-scroll">
+          <div className="hidden h-[570px] shadow-inner shadow-indigo-200/100 px-2 lg:flex flex-col gap-2 mt-5 py-2 overflow-scroll">
             {categories.map((category) => {
               return (
                 <div
@@ -122,7 +122,7 @@ function Jobs() {
               </select>
             </div>
           </div>
-          <div className="self-start w-full h-[720px] md:h-[780px] lg:h-[570px] mt-5  overflow-scroll flex flex-col p-5 gap-5">
+          <div className="self-start w-full h-[720px] md:h-[780px] lg:h-[570px] mt-5  overflow-scroll flex flex-col p-5 gap-5 shadow-inner px-8 shadow-indigo-200/100">
             {profiles.map(() => {
               return (
                 <div className="bg-white py-5 px-10 shadow-lg shadow-indigo-100/100 md:p-5 rounded-xl flex flex-col md:flex-row md:justify-between md:cursor-pointer md:hover:scale-105 duration-200">
@@ -142,8 +142,8 @@ function Jobs() {
                       </p>
                     </div>
                     <div>
-                      <div className="w-4 h-5 flex items-center text-new_primary">
-                        <ChevronDoubleRightIcon />
+                      <div className="w-5 h-5 flex justify-center items-center text-new_primary">
+                        <ChevronDoubleRightIcon className="w-full h-full" />
                       </div>
                     </div>
                   </div>

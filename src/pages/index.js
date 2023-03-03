@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import Head from "next/head";
 import Hero from "@/components/Hero/Hero";
 import Jobs from "@/components/Jobs";
@@ -5,6 +7,13 @@ import Navbar from "@/components/Navbar/Navbar";
 import Overview from "@/components/Overview";
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const app = document.getElementById("app");
+    app.addEventListener("click", () => {
+      setOpen(false);
+    });
+  }, []);
   return (
     <>
       <Head>
@@ -14,11 +23,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Navbar />
-        <Hero />
-        <Overview />
-        <Jobs />
-        lfnldsnl;n
+        <Navbar open={open} setOpen={setOpen} />
+        <div id="app">
+          <Hero />
+          <Overview />
+          <Jobs />
+          lfnldsnl;n
+        </div>
       </main>
     </>
   );
