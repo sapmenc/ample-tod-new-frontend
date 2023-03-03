@@ -6,6 +6,7 @@ import Hero from "@/components/Hero/Hero";
 import Jobs from "@/components/Jobs";
 import Navbar from "@/components/Navbar/Navbar";
 import Overview from "@/components/Overview";
+import WhyChoose from "@/components/WhyChoose";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -30,6 +31,7 @@ export default function Home() {
           <Overview />
           <Jobs />
           <About />
+          <WhyChoose />
           lfnldsnl;n
         </div>
       </main>

@@ -3,7 +3,7 @@ import { strategicIcon } from "@/assets/Images";
 
 function About() {
   return (
-    <div className="px-12 sm:px-16 flex flex-col items-center">
+    <div className="px-12 sm:px-16 flex flex-col items-center mb-16">
       {/* strategy image */}
       <div className="mt-[30px] md:mt-[50px] lg:mt-[60px] w-[75px] md:w-[150px] lg:w-[200px]">
         <Image
