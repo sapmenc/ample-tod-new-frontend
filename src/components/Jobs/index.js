@@ -15,24 +15,6 @@ const override = {
   margin: "0 auto",
   borderColor: "red",
 };
-const profiles = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const categories = [
-  "Java developer",
-  "Sales",
-  "Product manager",
-  "C++ developer",
-  "Sales",
-  "Product manager",
-  "Python developer",
-  "Sales",
-  "Product manager",
-  "Javascript developer",
-  "Sales",
-  "Product manager",
-  "ReactJS developer",
-  "Sales",
-  "Product manager",
-];
 
 function Jobs({ titles, filteredProfiles, isLoading, setIsLoading }) {
   const [selectedTitle, setSelectedTitle] = useState("Java developer");
@@ -107,7 +89,7 @@ function Jobs({ titles, filteredProfiles, isLoading, setIsLoading }) {
           </select>
 
           {/*job categories desktop view */}
-          <div className="hidden h-[570px] shadow-inner shadow-indigo-200/100 px-2 lg:flex flex-col gap-2 mt-5 py-2 overflow-scroll">
+          <div className="job-category-desktop hidden h-[570px] shadow-inner shadow-indigo-200/100 px-2 lg:flex flex-col gap-2 mt-5 py-2 overflow-scroll">
             {(titles || []).map((title) => {
               return (
                 <div
@@ -151,7 +133,7 @@ function Jobs({ titles, filteredProfiles, isLoading, setIsLoading }) {
               </select>
             </div>
           </div>
-          <div className="self-start w-full h-[720px] md:h-[780px] lg:h-[570px] mt-5  overflow-scroll flex flex-col p-5 gap-5 shadow-inner px-8 shadow-indigo-200/100">
+          <div className="job-found self-start w-full h-[720px] md:h-[780px] lg:h-[570px] mt-5  overflow-scroll flex flex-col p-5 gap-5 shadow-inner px-8 shadow-indigo-200/100">
             {filteredProfiles[selectedRange]?.length === 0 ? (
               <div className="w-full h-full flex flex-col justify-center items-center font-bold text-new_secondary text-center uppercase text-[24px] px-8 md:16">
                 <div className="w-[250px] h-[250px]">

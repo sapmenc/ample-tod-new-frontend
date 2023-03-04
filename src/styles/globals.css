@@ -5,3 +5,9 @@
 .no-hightlight{
     -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 }
+.job-category-desktop::-webkit-scrollbar {
+  display: none;
+}
+.job-found::-webkit-scrollbar {
+  display: none;
+}
