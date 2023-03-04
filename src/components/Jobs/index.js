@@ -29,21 +29,15 @@ function Jobs({
   const locationInput = useRef();
   const [selectedTitle, setSelectedTitle] = useState("");
   const [selectedRange, setSelectedRange] = useState(0);
-  const [isSearching, setIsSearching] = useState(false);
   const [searchProps, setSearchProps] = useState({
     search_title: "",
     search_location: "",
     search_category: "",
   });
-  const handleSearch = () => {
-    setIsSearching(true);
-    searchProfiles(profiles, searchProps, dispatchFilteredProfiles).then(() => {
-      setIsSearching(false);
-    });
+  const handleSearch = async () => {
+    await searchProfiles(profiles, searchProps, dispatchFilteredProfiles);
   };
-  useEffect(() => {
-    console.log("searching : ", isSearching);
-  }, [isSearching]);
+
   useEffect(() => {
     if (searchProps.shouldSearch === true) {
       handleSearch();
