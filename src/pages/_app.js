@@ -67,6 +67,8 @@ export default function App({ Component, pageProps }) {
       filteredProfiles={filteredProfiles}
       isLoading={isLoading}
       setIsLoading={setIsLoading}
+      profiles={profiles}
+      dispatchFilteredProfiles={dispatchFilteredProfiles}
     />
   );
 }

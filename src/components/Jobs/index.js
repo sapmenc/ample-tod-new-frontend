@@ -3,12 +3,13 @@ import {
   MagnifyingGlassIcon,
   MapPinIcon,
 } from "./../../../node_modules/@heroicons/react/24/outline/index.js";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import HashLoader from "react-spinners/HashLoader";
 import Image from "next/image.js";
 import Link from "next/link.js";
 import { profilesNotFound } from "@/assets/Images.js";
+import { searchProfiles } from "@/assets/utilityFunctions.js";
 
 const override = {
   display: "block",
@@ -16,9 +17,39 @@ const override = {
   borderColor: "red",
 };
 
-function Jobs({ titles, filteredProfiles, isLoading, setIsLoading }) {
-  const [selectedTitle, setSelectedTitle] = useState("Java developer");
+function Jobs({
+  titles,
+  filteredProfiles,
+  isLoading,
+  setIsLoading,
+  profiles,
+  dispatchFilteredProfiles,
+}) {
+  const titleInput = useRef();
+  const locationInput = useRef();
+  const [selectedTitle, setSelectedTitle] = useState("");
   const [selectedRange, setSelectedRange] = useState(0);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchProps, setSearchProps] = useState({
+    search_title: "",
+    search_location: "",
+    search_category: "",
+  });
+  const handleSearch = () => {
+    setIsSearching(true);
+    searchProfiles(profiles, searchProps, dispatchFilteredProfiles).then(() => {
+      setIsSearching(false);
+    });
+  };
+  useEffect(() => {
+    console.log("searching : ", isSearching);
+  }, [isSearching]);
+  useEffect(() => {
+    if (searchProps.shouldSearch === true) {
+      handleSearch();
+      setSearchProps({ ...searchProps, shouldSearch: false });
+    }
+  }, [searchProps]);
   return isLoading ? (
     <div className="p-8 h-[750px] flex justify-center items-center">
       <HashLoader
@@ -43,9 +74,17 @@ function Jobs({ titles, filteredProfiles, isLoading, setIsLoading }) {
           </div>
           <div className="h-full">
             <input
+              ref={titleInput}
               className="h-full px-2 outline-none no-underline placeholder:tracking-wide"
               placeholder="Job title or keyword"
               type="text"
+              onChange={(e) => {
+                setSearchProps({
+                  ...searchProps,
+                  search_title: e.target.value,
+                  shouldSearch: false,
+                });
+              }}
             />
           </div>
         </div>
@@ -58,14 +97,32 @@ function Jobs({ titles, filteredProfiles, isLoading, setIsLoading }) {
           </div>
           <div className="h-full">
             <input
+              ref={locationInput}
               className="h-full px-2 outline-none no-underline placeholder:tracking-wide"
               placeholder="Location"
               type="text"
+              onChange={(e) => {
+                setSearchProps({
+                  ...searchProps,
+                  search_location: e.target.value,
+                  shouldSearch: false,
+                });
+              }}
             />
           </div>
         </div>
         <button className="text-white bg-new_primary rounded-xl font-bold p-5 md:w-[250px] group">
-          <p className="md:group-hover:scale-110 ease-in-out duration-200">
+          <p
+            className="md:group-hover:scale-110 ease-in-out duration-200"
+            onClick={() => {
+              setSearchProps({
+                ...searchProps,
+                search_category: "",
+                shouldSearch: true,
+              });
+              setSelectedTitle("");
+            }}
+          >
             Search
           </p>
         </button>
@@ -79,7 +136,17 @@ function Jobs({ titles, filteredProfiles, isLoading, setIsLoading }) {
           </h1>
           {/* job categories mobile view */}
 
-          <select className="lg:hidden w-full mt-[22px] bg-white rounded-xl text-gray-400 h-10 px-5 outline-none">
+          <select
+            className="lg:hidden w-full mt-[22px] bg-white rounded-xl text-gray-400 h-10 px-5 outline-none"
+            onChange={(e) => {
+              setSearchProps({
+                search_title: "",
+                search_location: "",
+                search_category: e.target.value,
+                shouldSearch: true,
+              });
+            }}
+          >
             <option className="text-center" value="">
               --- All Profiles ---
             </option>
@@ -97,7 +164,30 @@ function Jobs({ titles, filteredProfiles, isLoading, setIsLoading }) {
                     selectedTitle === title.name
                       ? "bg-new_primary text-white"
                       : "bg-white text-gray-700 hover:bg-new_primary/80 hover:text-white"
-                  } ease-in-out durarion-200 px-4 py-2 rounded-lg flex justify-between items-center cursor-pointer `}
+                  } ease-in-out durarion-200 px-4 py-2 rounded-lg flex justify-between items-center cursor-pointer`}
+                  onClick={(e) => {
+                    titleInput.current.value = "";
+                    locationInput.current.value = "";
+                    if (selectedTitle === title.name) {
+                      setSelectedTitle("");
+                      // need to remove title.name from search_title
+                      setSearchProps({
+                        search_title: "",
+                        search_location: "",
+                        search_category: "",
+                        shouldSearch: true,
+                      });
+                    } else {
+                      setSelectedTitle(title.name);
+                      // need to set search_title = title.name
+                      setSearchProps({
+                        search_title: "",
+                        search_location: "",
+                        search_category: title.name,
+                        shouldSearch: true,
+                      });
+                    }
+                  }}
                 >
                   <p>{title.name}</p>
                   <div className="h-4 w-4">

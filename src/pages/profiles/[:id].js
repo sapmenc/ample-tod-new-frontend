@@ -320,7 +320,7 @@ function profile() {
                         }`}</div>
                       </div>
                       {/* Job Description */}
-                      <p className="bg-white rounded p-2 h-60 overflow-y-scroll">
+                      <p className="rounded p-2 h-32 overflow-y-scroll">
                         {education?.description}
                       </p>
                     </div>
