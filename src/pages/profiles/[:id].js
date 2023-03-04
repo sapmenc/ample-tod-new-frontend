@@ -331,7 +331,7 @@ function profile() {
             {/* Recruitment Enquiry */}
             <div className="tracking-wide bg-primary flex flex-col gap-4 items-center p-4 px-8 rounded-3xl lg:w-[33%] max-h-[550px]">
               <p className="font-bold text-xl lg:text-2xl my-2 text-white">
-                Recruitment Enquiry
+                Profile Enquiry
               </p>
               <input
                 type="text"
