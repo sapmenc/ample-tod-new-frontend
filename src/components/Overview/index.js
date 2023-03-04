@@ -3,7 +3,7 @@ import { ItWorkIcon } from "@/assets/Images";
 
 function Overview() {
   return (
-    <div className="flex justify-center w-screen text-center my-14 md:my-20 p-8 md:16">
+    <div className="flex justify-center w-full text-center my-14 md:my-20 p-8 md:16">
       <div className="md:max-w-[690px] flex flex-col items-center">
         <div>
           <Image
