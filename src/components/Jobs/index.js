@@ -124,7 +124,7 @@ function Jobs({
       {/* jobs main */}
       <div className="mt-[180px] h-full md:mt-[100px] w-full flex flex-col items-center md:items-start lg:flex-row  gap-[30px] lg:gap-[114px]">
         {/* job categories */}
-        <div className="w-full overflow-hidden lg:basis-2/6 xl:basis-2/5 lg:min-w-[292px] lg:max-w-[330px]">
+        <div className="w-full overflow-hidden lg:basis-2/8 xl:basis-2/6 lg:min-w-[292px] lg:max-w-[330px]">
           <h1 className="text-new_secondary tracking-wide font-bold text-[30px] text-center">
             Job Categories
           </h1>
@@ -193,10 +193,16 @@ function Jobs({
           </div>
         </div>
         {/* job found */}
-        <div className="w-full h-full basis-4/6 xl:basis-3/5 flex flex-col items-center">
+        <div className="w-full h-full basis-6/8 xl:basis-4/6 flex flex-col items-center">
           <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:items-start w-full">
             <h1 className="text-new_secondary tracking-wide font-bold text-[30px] text-center">
-              Job Found
+              Active Profiles (
+              {filteredProfiles[0]?.length +
+                filteredProfiles[1]?.length +
+                filteredProfiles[2]?.length +
+                filteredProfiles[3]?.length +
+                filteredProfiles[4]?.length}
+              )
             </h1>
             {/* experience filter */}
             <div className="flex items-center bg-transparent mt-[13px]">

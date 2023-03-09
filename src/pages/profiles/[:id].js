@@ -183,10 +183,11 @@ function profile() {
                 </h1>
                 <h2>
                   <span className="whitespace-nowrap truncate font-bold text-new_secondary">
-                    {profile?.profileTitle}
+                    {profile?.profileTitle} | {profile?.yearsOfExperience} years
+                    | {profile?.availability}
                   </span>
                 </h2>
-                <h2 className="whitespace-nowrap truncate text-new_secondary">
+                {/* <h2 className="whitespace-nowrap truncate text-new_secondary">
                   {profile?.experiences?.map((experience, index) => {
                     return (
                       <span>
@@ -196,34 +197,36 @@ function profile() {
                       </span>
                     );
                   })}
-                </h2>
-                <h2 className="whitespace-nowrap truncate text-new_secondary">
-                  {profile?.educations?.map((education, index) => {
-                    return (
-                      <span>
-                        {index !== 0 && " | "}
-                        {education.institution}
-                      </span>
-                    );
-                  })}
-                </h2>
+                </h2> */}
+                {profile?.educations?.length > 0 && (
+                  <h2 className="whitespace-nowrap truncate text-new_secondary">
+                    {profile?.educations?.map((education, index) => {
+                      return (
+                        <span>
+                          {index !== 0 && " | "}
+                          {education.institution}
+                        </span>
+                      );
+                    })}
+                  </h2>
+                )}
                 <h3 className="whitespace-nowrap truncate text-new_secondary">
-                  Additional Skills : {profile?.skills?.join(" | ")}
+                  Skillset : {profile?.skills?.join(" | ")}
                 </h3>
 
                 <hr className="w-[90%] my-10" />
 
                 <h3 className="font-bold text-xl text-new_secondary">
-                  Locations:
+                  Location:
                 </h3>
                 {/* Current Location */}
-                <p className="whitespace-nowrap truncate text-new_secondary">
+                <p className="mt-3 whitespace-nowrap truncate text-new_secondary">
                   <span className="font-bold text-lg">Current Location: </span>
                   {/* @ts-ignore */}
                   {formatLocation(profile.primaryLocation)}
                 </p>
                 {/* Preferred Locations */}
-                <div className="mt-5 text-new_secondary">
+                <div className="mt-2 text-new_secondary">
                   <p className="font-bold whitespace-nowrap truncate text-lg">
                     Preferred Location:
                   </p>
@@ -243,6 +246,9 @@ function profile() {
                   Profile Summary:
                 </h3>
 
+                {/* About */}
+                <div className="font-thin text-md">{profile?.about}</div>
+
                 <h3 className="font-bold text-lg pt-2 text-new_secondary">
                   {/* @ts-ignore */}
                   Experience: {`${profile?.yearsOfExperience} Years`}
@@ -252,12 +258,12 @@ function profile() {
                   {/* @ts-ignore */}
                   {profile?.experiences?.map((experience, index) => (
                     <div
-                      className="p-5 md:p-8 flex flex-col gap-2 rounded-2xl bg-[#F1F4FD]"
+                      className="p-5 md:p-8 flex flex-col gap-2 rounded-2xl bg-[#F1F4FD] shadow-lg shadow-indigo-100/100"
                       key={index}
                     >
                       <div className="flex justify-between">
                         <div className="flex flex-col">
-                          <h3 className="font-bold text-lg">
+                          <h3 className="font-bold text-[28px]">
                             {experience?.companyName}
                           </h3>
                           <h4 className="font-bold">{experience?.position}</h4>
@@ -285,47 +291,51 @@ function profile() {
                   ))}
                 </div>
 
-                <h3 className="font-bold text-xl mt-7 text-new_secondary">
-                  {/* @ts-ignore */}
-                  Education:
-                </h3>
-                {/* Education */}
-                <div className="flex flex-col gap-6 pt-4 text-new_secondary">
-                  {/* @ts-ignore */}
-                  {profile?.educations?.map((education, index) => (
-                    <div
-                      className="p-5 md:p-8 bg-[#F1F4FD] flex flex-col gap-2 rounded-2xl"
-                      key={index}
-                    >
-                      <div className="flex justify-between">
-                        <div className="flex flex-col">
-                          <h3 className="font-bold text-lg">
-                            {education?.institution}
-                          </h3>
-                          <h4 className="font-bold">{`${education?.courseType} - ${education?.courseName}`}</h4>
+                {profile?.educations?.length > 0 && (
+                  <div>
+                    <h3 className="font-bold text-xl mt-7 text-new_secondary">
+                      {/* @ts-ignore */}
+                      Education:
+                    </h3>
+                    {/* Education */}
+                    <div className="flex flex-col gap-6 pt-4 text-new_secondary">
+                      {/* @ts-ignore */}
+                      {profile?.educations?.map((education, index) => (
+                        <div
+                          className="p-5 md:p-8 bg-[#F1F4FD] flex flex-col gap-2 rounded-2xl shadow-lg shadow-indigo-100/100"
+                          key={index}
+                        >
+                          <div className="flex justify-between">
+                            <div className="flex flex-col">
+                              <h3 className="font-bold text-[28px]">
+                                {education?.institution}
+                              </h3>
+                              <h4 className="font-bold">{`${education?.courseType} - ${education?.courseName}`}</h4>
+                            </div>
+                            <div className="font-bold text-sm lg:hidden">{`${formatDateShort(
+                              education?.startDate
+                            )} - ${
+                              education?.isCurrentlyPersuing
+                                ? "Present"
+                                : `${formatDateShort(education?.endDate)}`
+                            }`}</div>
+                            <div className="font-bold text-sm hidden lg:inline">{`${formatDateLong(
+                              education?.startDate
+                            )} - ${
+                              education?.isCurrentlyPersuing
+                                ? "Present"
+                                : `${formatDateLong(education?.endDate)}`
+                            }`}</div>
+                          </div>
+                          {/* Job Description */}
+                          <p className="rounded p-2 h-32 overflow-y-scroll">
+                            {education?.description}
+                          </p>
                         </div>
-                        <div className="font-bold text-sm lg:hidden">{`${formatDateShort(
-                          education?.startDate
-                        )} - ${
-                          education?.isCurrentlyPersuing
-                            ? "Present"
-                            : `${formatDateShort(education?.endDate)}`
-                        }`}</div>
-                        <div className="font-bold text-sm hidden lg:inline">{`${formatDateLong(
-                          education?.startDate
-                        )} - ${
-                          education?.isCurrentlyPersuing
-                            ? "Present"
-                            : `${formatDateLong(education?.endDate)}`
-                        }`}</div>
-                      </div>
-                      {/* Job Description */}
-                      <p className="rounded p-2 h-32 overflow-y-scroll">
-                        {education?.description}
-                      </p>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
             {/* Recruitment Enquiry */}
