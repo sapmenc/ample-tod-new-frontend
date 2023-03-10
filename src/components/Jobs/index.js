@@ -17,6 +17,13 @@ const override = {
   borderColor: "red",
 };
 
+const expRanges = [
+  "0 - 2 years experience",
+  "3 - 5 years experience",
+  "6 - 7 years experience",
+  "8 - 10 years experience",
+  "10+ years experience",
+];
 function Jobs({
   titles,
   filteredProfiles,
@@ -122,7 +129,7 @@ function Jobs({
         </button>
       </div>
       {/* jobs main */}
-      <div className="mt-[180px] h-full md:mt-[100px] w-full flex flex-col items-center md:items-start lg:flex-row  gap-[30px] lg:gap-[114px]">
+      <div className="mt-[180px] overflow-hidden h-full md:mt-[100px] w-full flex flex-col items-center md:items-start lg:flex-row  gap-[30px] lg:gap-[114px]">
         {/* job categories */}
         <div className="w-full overflow-hidden lg:basis-2/8 xl:basis-2/6 lg:min-w-[292px] lg:max-w-[330px]">
           <h1 className="text-new_secondary tracking-wide font-bold text-[30px] text-center">
@@ -131,7 +138,7 @@ function Jobs({
           {/* job categories mobile view */}
 
           <select
-            className="lg:hidden w-full mt-[22px] bg-white rounded-xl text-gray-400 h-10 px-5 outline-none"
+            className="lg:hidden w-full mt-[22px] mb-[28px] bg-white rounded-xl text-gray-400 h-10 px-5 outline-none"
             onChange={(e) => {
               setSearchProps({
                 search_title: "",
@@ -204,73 +211,52 @@ function Jobs({
                 filteredProfiles[4]?.length}
               )
             </h1>
-            {/* experience filter */}
-            <div className="flex items-center bg-transparent mt-[13px]">
-              <p className="text-new_secondary font-bold">sort by:</p>
-              <select
-                name=""
-                id=""
-                className="bg-transparent text-new_primary font-bold outline-none"
-                onChange={(e) => {
-                  setSelectedRange(parseInt(e.target.value));
-                }}
-              >
-                <option value="0">0 - 2 years experience</option>
-                <option value="1">3 - 5 years experience</option>
-                <option value="2">6 - 7 years experience</option>
-                <option value="3">8 - 10 years experience</option>
-                <option value="4">10+ years experience</option>
-              </select>
-            </div>
           </div>
-          <div className="job-found self-start w-full h-[720px] md:h-[780px] lg:h-[570px] mt-5  overflow-scroll flex flex-col p-5 gap-5 shadow-inner px-8 shadow-indigo-200/100">
-            {filteredProfiles[selectedRange]?.length === 0 ? (
-              <div className="w-full h-full flex flex-col justify-center items-center font-bold text-new_secondary text-center uppercase text-[24px] px-8 md:16">
-                <div className="w-[250px] h-[250px]">
-                  <Image
-                    className="w-full h-full"
-                    width={170}
-                    height={50}
-                    object-fit="contain"
-                    src={profilesNotFound}
-                    alt="logo"
-                  />
-                </div>
-                <h1>No profiles in this experience range</h1>
-              </div>
-            ) : (
-              (filteredProfiles[selectedRange] || []).map((profile) => {
+          <div className="job-found self-start w-[88vw] md:w-[82vw] lg:w-[50vw] xl:w-[60vw] h-[720px] overflow-x-scroll md:h-[780px] lg:h-[570px] mt-5 flex gap-8 shadow-inner px-8 py-4 shadow-indigo-200/100">
+            {filteredProfiles.map((profiles, key) => {
+              if (profiles.length > 0 || true) {
                 return (
-                  <Link href={`profiles/${profile._id}`}>
-                    <div className="bg-white py-5 px-10 shadow-lg shadow-indigo-100/100 md:p-5 rounded-xl flex flex-col md:flex-row md:justify-between md:cursor-pointer md:hover:scale-105 duration-200">
-                      <div className="w-full">
-                        <h1 className="text-new_primary font-bold tracking-wide text-lg">
-                          {profile.profileTitle}
-                        </h1>
-                        <h2 className="text-new_secondary tracking-wide">
-                          {profile.skills.join(" | ")}
-                        </h2>
-                      </div>
-                      <div className="flex items-center justify-between md:gap-5 md:justify-end w-full">
-                        <div className="flex md:flex-col gap-5 md:gap-0">
-                          <p className="text-gray-700 tracking-wide">
-                            view job
-                          </p>
-                          <p className="text-slate-400 tracking-wide">
-                            {2} days ago
-                          </p>
-                        </div>
-                        <div>
-                          <div className="w-5 h-5 flex justify-center items-center text-new_primary">
-                            <ChevronDoubleRightIcon className="w-full h-full" />
-                          </div>
-                        </div>
-                      </div>
+                  <div className="min-w-[350px] w-[350px] max-w-[350px] flex flex-col p-3  bg-[#c7d4fa] rounded-xl">
+                    <div className="mb-6 bg-new_primary text-md text-white w-full p-3 text-center font-bold rounded-lg">
+                      {expRanges[key]}
                     </div>
-                  </Link>
+                    <div className="overflow-y-scroll overflow-x-hidden p-2 flex flex-col gap-5">
+                      {(profiles || []).map((profile) => {
+                        return (
+                          <Link href={`profiles/${profile._id}`}>
+                            <div className="bg-white min-h-[100px] h-[100px] max-h-[100px] px-5 shadow-lg shadow-indigo-100/100 md:p-5 rounded-xl flex flex-col justify-center items-center md:flex-row md:justify-between md:cursor-pointer md:hover:scale-105 duration-200">
+                              <div className="w-full">
+                                <h1 className="text-new_primary font-bold tracking-wide text-md truncate overflow-hidden">
+                                  {profile.profileTitle}
+                                </h1>
+                                <h2 className="text-new_secondary tracking-wide text-sm truncate overflow-hidden">
+                                  {profile.skills.join(" | ")}
+                                </h2>
+                              </div>
+                              <div className="flex items-center justify-between md:gap-5 md:justify-end w-full text-sm overflow-hidden">
+                                <div className="flex md:flex-col gap-28 md:gap-0 overflow-hidden">
+                                  <p className="text-gray-700 tracking-wide overflow-hidden">
+                                    view job
+                                  </p>
+                                  <p className="text-slate-400 tracking-wide overflow-hidden">
+                                    {2} days ago
+                                  </p>
+                                </div>
+                                <div>
+                                  <div className="w-5 h-5 flex justify-center items-center text-new_primary">
+                                    <ChevronDoubleRightIcon className="w-full h-full" />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
                 );
-              })
-            )}
+              }
+            })}
           </div>
         </div>
       </div>
