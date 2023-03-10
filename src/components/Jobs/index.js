@@ -214,7 +214,7 @@ function Jobs({
           </div>
           <div className="job-found self-start w-[88vw] md:w-[82vw] lg:w-[50vw] xl:w-[60vw] h-[720px] overflow-x-scroll md:h-[780px] lg:h-[570px] mt-5 flex gap-8 shadow-inner px-8 py-4 shadow-indigo-200/100">
             {filteredProfiles.map((profiles, key) => {
-              if (profiles.length > 0 || true) {
+              if (profiles.length > 0) {
                 return (
                   <div className="min-w-[350px] w-[350px] max-w-[350px] flex flex-col p-3  bg-[#c7d4fa] rounded-xl">
                     <div className="mb-6 bg-new_primary text-md text-white w-full p-3 text-center font-bold rounded-lg">
